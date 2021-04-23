@@ -1,8 +1,4 @@
 # Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 name: "03_WeatherApi_CD"
 
 trigger:
@@ -11,8 +7,8 @@ trigger:
       - main
   paths:
     include:
-      - .azuredevops/01-azure-pipelines.yml
-      - 01_IaC
+      - .azuredevops/03-azure-pipelines.yml
+      - 03_WeatherAPI
 
 pool:
   vmImage: ubuntu-latest
