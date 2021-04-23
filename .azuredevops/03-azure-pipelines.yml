@@ -10,6 +10,9 @@ trigger:
       - .azuredevops/03-azure-pipelines.yml
       - 03_WeatherAPI
 
+variables:
+  BuildConfiguration: Debug
+
 pool:
   vmImage: ubuntu-latest
 
