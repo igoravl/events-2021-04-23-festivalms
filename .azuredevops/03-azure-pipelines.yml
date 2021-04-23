@@ -25,7 +25,7 @@ stages:
     steps:
     - script: dotnet publish --configuration $(buildConfiguration) -o "$(Build.ArtifactStagingDirectory)"
       displayName: 'Run dotnet publish'
-      workingDirectory: '$(System.WorkingDirectory)/03_WeatherAPI'
+      workingDirectory: 03_WeatherAPI
     - task: PublishBuildArtifacts@1
       displayName: "Publish artifact"
       inputs:
