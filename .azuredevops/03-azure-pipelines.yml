@@ -67,3 +67,18 @@ stages:
               appName: 'igoravl-demo-festivalms'
               package: '$(System.DefaultWorkingDirectory)/**/*.zip'
               deploymentMethod: 'auto'
+          - task: apim@5
+            displayName: "Update API"
+            inputs:
+              ConnectedServiceNameARM: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
+              ResourceGroupName: 'rg_demo_apim_festivalms'
+              ApiPortalName: 'igoravl-apim-dev-brs'
+              OpenAPISpec: 'v3'
+              Format: 'json'
+              Authorization: 'None'
+              SwaggerPicker: 'Artifact'
+              swaggerartifact: '$(System.DefaultWorkingDirectory)/drop/swagger.json'
+              targetapi: 'WeatherAPI'
+              pathapi: 'api'
+              MicrosoftApiManagementAPIVersion: '2017-03-01'
+
