@@ -26,6 +26,7 @@ stages:
   - job: BuildApiProject
     steps:
     - task: DotNetCoreCLI@2
+      displayName: "Build and package solution"
       inputs:
         command: publish
         publishWebProjects: True
@@ -52,12 +53,14 @@ stages:
         deploy:
           steps:
           - task: DownloadBuildArtifacts@0
+            displayName: "Download artifacts"
             inputs:
               buildType: 'current'
               downloadType: 'single'
               artifactName: 'drop'
               downloadPath: '$(System.DefaultWorkingDirectory)'
           - task: AzureWebApp@1
+            displayName: "Deploy API"
             inputs:
               azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
               appType: 'webApp'
