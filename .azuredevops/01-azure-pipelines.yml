@@ -3,6 +3,8 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
+name: "01- IaC CI/CD"
+
 trigger:
 - main
 
