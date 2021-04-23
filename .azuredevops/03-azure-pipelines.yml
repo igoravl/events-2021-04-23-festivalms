@@ -23,7 +23,7 @@ stages:
   jobs:
   - job: BuildApiProject
     steps:
-    - script: dotnet publish --configuration $(buildConfiguration) -o "$(Build.ArtifactStagingDirectory)"
+    - script: dotnet publish -o "$(Build.ArtifactStagingDirectory)"
       displayName: 'Run dotnet publish'
       workingDirectory: 03_WeatherAPI
     - task: PublishBuildArtifacts@1
