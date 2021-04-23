@@ -63,7 +63,7 @@ stages:
               azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
               appType: 'webApp'
               appName: 'igoravl-demo-festivalms'
-              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              package: '$(System.ArtifactsDirectory)/**/*.zip'
               deploymentMethod: 'auto'
           - task: apim@5
             displayName: "Update API"
@@ -75,7 +75,7 @@ stages:
               Format: 'json'
               Authorization: 'None'
               SwaggerPicker: 'Artifact'
-              swaggerartifact: '$(System.DefaultWorkingDirectory)/drop/swagger.json'
+              swaggerartifact: '$(System.ArtifactsDirectory)/drop/swagger.json'
               targetapi: 'WeatherAPI'
               pathapi: 'api'
               MicrosoftApiManagementAPIVersion: '2017-03-01'
