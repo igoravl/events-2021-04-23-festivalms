@@ -14,13 +14,11 @@ variables:
   BuildConfiguration: Debug
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: windows-latest
 
 stages:
 
 - stage: Build
-  pool:
-    vmImage: windows-latest
 
   jobs:
   - job: BuildApiProject
@@ -52,13 +50,13 @@ stages:
       runOnce:
         deploy:
           steps:
-          - task: DownloadBuildArtifacts@0
-            displayName: "Download artifacts"
-            inputs:
-              buildType: 'current'
-              downloadType: 'single'
-              artifactName: 'drop'
-              downloadPath: '$(System.DefaultWorkingDirectory)'
+          # - task: DownloadBuildArtifacts@0
+          #   displayName: "Download artifacts"
+          #   inputs:
+          #     buildType: 'current'
+          #     downloadType: 'single'
+          #     artifactName: 'drop'
+          #     downloadPath: '$(System.DefaultWorkingDirectory)'
           - task: AzureWebApp@1
             displayName: "Deploy API"
             inputs:
