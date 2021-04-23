@@ -71,5 +71,22 @@ stages:
               swaggerartifact: '$(Agent.BuildDirectory)/drop/swagger.json'
               targetapi: 'WeatherAPI'
               pathapi: 'api'
+              TemplateSelector: 'Custom'
+              Custom: |
+                <policies>
+                    <inbound>
+                        <base />
+                        <set-backend-service base-url="https://igoravl-demo-festivalms.azurewebsites.net" />
+                    </inbound>
+                    <backend>
+                        <base />
+                    </backend>
+                    <outbound>
+                        <base />
+                    </outbound>
+                    <on-error>
+                        <base />
+                    </on-error>
+                </policies>
               MicrosoftApiManagementAPIVersion: '2017-03-01'
 
