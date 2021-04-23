@@ -26,6 +26,10 @@ stages:
     - script: dotnet publish -o "$(Build.ArtifactStagingDirectory)"
       displayName: 'Run dotnet publish'
       workingDirectory: 03_WeatherAPI
+    - script: |
+        dotnet tool install -g swagger
+        cd 03_WeatherAPI/bin/Debug/net5.0
+        swagger tofile --output swagger.json .\WeatherAPI.dll v1
     - task: PublishBuildArtifacts@1
       displayName: "Publish artifact"
       inputs:
