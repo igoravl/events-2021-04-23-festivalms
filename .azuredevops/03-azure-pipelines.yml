@@ -22,11 +22,12 @@ stages:
   jobs:
   - job: BuildApiProject
     steps:
-    - script: |
-        dotnet build /p:configuration="debug" /p:platform="any cpu" /p:WebPublishMethod=Package /p:PackageFileName="WeatherApi.zip" /p:DesktopBuildPackageLocation="WeatherApi.zip" /p:PackageAsSingleFile=true /p:PackageLocation="WeatherApi.zip" /p:DeployOnBuild=true /p:DeployTarget=Package
-        move *.zip $(Build.ArtifactStagingDirectory)
-      displayName: 'Run dotnet build'
-      workingDirectory: 03_WeatherAPI
+    - task: DotNetCoreCLI@2
+      inputs:
+        command: publish
+        publishWebProjects: True
+        arguments: '--configuration $(BuildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+        zipAfterPublish: True
     - script: |
         dotnet tool install --global Swashbuckle.AspNetCore.Cli
         cd 03_WeatherAPI/bin/Debug/net5.0
@@ -53,10 +54,10 @@ stages:
               downloadType: 'single'
               artifactName: 'drop'
               downloadPath: '$(System.DefaultWorkingDirectory)'
-          - task: AzureRmWebAppDeployment@4
+          - task: AzureWebApp@1
             inputs:
-              ConnectionType: 'AzureRM'
               azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
               appType: 'webApp'
-              WebAppName: 'igoravl-demo-festivalms'
-              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              appName: 'igoravl-demo-festivalms'
+              package: '$(System.DefaultWorkingDirectory)/**/*.zip'
+              deploymentMethod: 'auto'
