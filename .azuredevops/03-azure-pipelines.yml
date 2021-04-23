@@ -16,12 +16,15 @@ pool:
 stages:
 
 - stage: Build
+  pool:
+    vmImage: windows-latest
+
   jobs:
   - job: BuildApiProject
     steps:
     - script: |
         dotnet build /p:configuration="debug" /p:platform="any cpu" /p:WebPublishMethod=Package /p:PackageFileName="WeatherApi.zip" /p:DesktopBuildPackageLocation="WeatherApi.zip" /p:PackageAsSingleFile=true /p:PackageLocation="WeatherApi.zip" /p:DeployOnBuild=true /p:DeployTarget=Package
-        mv *.zip $(Build.ArtifactStagingDirectory)
+        move *.zip $(Build.ArtifactStagingDirectory)
       displayName: 'Run dotnet build'
       workingDirectory: 03_WeatherAPI
     - script: |
