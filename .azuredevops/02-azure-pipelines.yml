@@ -1,5 +1,5 @@
 # Starter pipeline
-name: "03_WeatherApi_CD"
+name: "02_DevPortal_CD"
 
 trigger:
   branches:
