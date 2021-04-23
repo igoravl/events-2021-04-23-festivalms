@@ -20,7 +20,7 @@ stages:
   - job: BuildApiProject
     steps:
     - script: dotnet publish -o "$(Build.ArtifactStagingDirectory)"
-      displayName: 'Run dotnet publish'
+      displayName: 'Run dotnet build'
       workingDirectory: 03_WeatherAPI
     - script: |
         dotnet tool install --global Swashbuckle.AspNetCore.Cli
