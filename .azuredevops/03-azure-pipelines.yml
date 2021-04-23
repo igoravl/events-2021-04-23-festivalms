@@ -53,6 +53,7 @@ stages:
               downloadType: 'single'
               artifactName: 'drop'
               downloadPath: '$(System.DefaultWorkingDirectory)'
+
           - task: AzureWebApp@1
             inputs:
               azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
