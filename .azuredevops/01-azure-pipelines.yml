@@ -44,6 +44,7 @@ stages:
         deploy:
           steps:
           - task: DownloadBuildArtifacts@0
+            displayName: "Download artifacts"
             inputs:
               buildType: 'current'
               downloadType: 'specific'
@@ -55,6 +56,6 @@ stages:
               azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
-              workingDirectory: '$(System.ArtifactsDirectory)'
+              workingDirectory: '$(System.ArtifactsDirectory)/drop'
               inlineScript: |
                 az deployment group create -f Apim.json -g rg_demo_apim_festivalms
