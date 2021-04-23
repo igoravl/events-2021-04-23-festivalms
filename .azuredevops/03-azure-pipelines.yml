@@ -19,7 +19,9 @@ stages:
   jobs:
   - job: BuildApiProject
     steps:
-    - script: dotnet publish -o "$(Build.ArtifactStagingDirectory)"
+    - script: |
+        dotnet build /p:configuration="debug" /p:platform="any cpu" /p:WebPublishMethod=Package /p:PackageFileName="WeatherApi.zip" /p:DesktopBuildPackageLocation="WeatherApi.zip" /p:PackageAsSingleFile=true /p:PackageLocation="WeatherApi.zip" /p:DeployOnBuild=true /p:DeployTarget=Package
+        mv *.zip $(Build.ArtifactStagingDirectory)
       displayName: 'Run dotnet build'
       workingDirectory: 03_WeatherAPI
     - script: |
