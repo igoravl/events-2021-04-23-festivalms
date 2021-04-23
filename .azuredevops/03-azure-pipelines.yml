@@ -23,9 +23,10 @@ stages:
       displayName: 'Run dotnet publish'
       workingDirectory: 03_WeatherAPI
     - script: |
-        dotnet tool install -g swagger
+        dotnet tool install --global Swashbuckle.AspNetCore.Cli
         cd 03_WeatherAPI/bin/Debug/net5.0
         swagger tofile --output swagger.json .\WeatherAPI.dll v1
+      displayName: "Generate Swagger file"
     - task: PublishBuildArtifacts@1
       displayName: "Publish artifact"
       inputs:
