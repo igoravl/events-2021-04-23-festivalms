@@ -6,7 +6,13 @@
 name: "01_IaC_CD"
 
 trigger:
-- main
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - .azuredevops/01-azure-pipelines.yml
+      - 01_IaC
 
 pool:
   vmImage: ubuntu-latest
