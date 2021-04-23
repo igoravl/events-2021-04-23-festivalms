@@ -15,7 +15,7 @@ stages:
 
 - stage: Build
   jobs:
-  - job: BuildBicep
+  - job: GenerateArmTemplate
     steps:
     - task: AzureCLI@2
       displayName: "Build Bicep file"
@@ -47,10 +47,10 @@ stages:
             inputs:
               buildType: 'current'
               downloadType: 'specific'
-              itemPattern: 'Apim.json'
+              itemPattern: 'drop/Apim.json'
               downloadPath: '$(System.ArtifactsDirectory)'
           - task: AzureCLI@2
-            displayName: "Build Bicep file"
+            displayName: "Deploy API Management resource"
             inputs:
               azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
               scriptType: 'bash'
