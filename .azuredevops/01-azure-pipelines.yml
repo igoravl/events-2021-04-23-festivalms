@@ -17,13 +17,13 @@ jobs:
   - task: AzureCLI@2
     inputs:
       azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
-      scriptType: 'ps'
+      scriptType: 'bash'
       scriptLocation: 'inlineScript'
       inlineScript: |
         az bicep install
         cd 01_IaC
         az bicep build Apim.bicep
-        copy Apim.json '$(Build.ArtifactStagingDirectory)'
+        cp Apim.json '$(Build.ArtifactStagingDirectory)'
   - task: PublishBuildArtifacts@1
     inputs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
