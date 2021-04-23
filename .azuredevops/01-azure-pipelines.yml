@@ -37,6 +37,10 @@ stages:
 
 - stage: Release
   jobs:
-  - job:
-    steps:
-      - script: echo Release
+  - deployment:
+    environment: Azure_Apim_Resource_Group
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: echo Release
