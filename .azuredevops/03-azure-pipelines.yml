@@ -66,7 +66,7 @@ stages:
               package: '$(Agent.BuildDirectory)/**/*.zip'
               deploymentMethod: 'auto'
           - task: apim@5
-            displayName: "Update API"
+            displayName: "Update API definition in APIM"
             inputs:
               ConnectedServiceNameARM: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
               ResourceGroupName: 'rg_demo_apim_festivalms'
