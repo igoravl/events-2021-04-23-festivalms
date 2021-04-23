@@ -1,0 +1,63 @@
+# Starter pipeline
+name: "03_WeatherApi_CD"
+
+trigger:
+  branches:
+    include:
+      - main
+  paths:
+    include:
+      - .azuredevops/02-azure-pipelines.yml
+      - 02_DevPortal
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+
+- stage: Build
+
+  jobs:
+  - job: CapturePortalData
+    steps:
+    - task: AzureCLI@2
+      displayName: "Extract portal data"
+      inputs:
+        azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
+        scriptType: 'bash'
+        scriptLocation: 'inlineScript'
+        inlineScript: |
+          npm install @azure/storage-blob yargs
+          node ./capture \
+          --subscriptionId "630a091a-3a08-4b05-a9f7-1ee7b784c0ae" \
+          --resourceGroupName "rg_demo_apim_festivalms" \
+          --serviceName "igoravl-demo-apim"
+    - task: PublishBuildArtifacts@1
+      displayName: "Publish artifact"
+      inputs:
+        PathtoPublish: '$(Build.DefaultWorkingDirectory)/03_DevPortal'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
+
+- stage: Release
+  jobs:
+  - deployment:
+    environment: Dev_Portal
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: AzureCLI@2
+            displayName: "Build Bicep file"
+            inputs:
+              azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
+              scriptType: 'bash'
+              scriptLocation: 'inlineScript'
+              inlineScript: |
+                npm install @azure/storage-blob yargs
+                node ./capture \
+                --subscriptionId "630a091a-3a08-4b05-a9f7-1ee7b784c0ae" \
+                --resourceGroupName "rg_demo_apim_festivalms" \
+                --serviceName "igoravl-apim-dev-brs"
+            displayName: "Deploy Dev Portal"
+
