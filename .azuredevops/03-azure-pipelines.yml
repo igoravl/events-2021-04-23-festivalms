@@ -76,7 +76,7 @@ stages:
                 <policies>
                     <inbound>
                         <base />
-                        <set-backend-service base-url="https://igoravl-demo-festivalms.azurewebsites.net" />
+                        <set-backend-service base-url="https://igoravl-demo-festivalms-dev.azurewebsites.net" />
                     </inbound>
                     <backend>
                         <base />

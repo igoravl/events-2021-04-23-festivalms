@@ -1,8 +1,3 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 name: "01_IaC_CD"
 
 trigger:
@@ -17,6 +12,15 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
+# TO DO:
+# ======
+# Uncomment the line(s) below and set the required values to run the pipeline
+#
+#
+#
+# variables:
+#   AZURE_SUBSCRIPTION: '<Your Azure subscription name>'
+
 stages:
 
 - stage: Build
@@ -26,7 +30,7 @@ stages:
     - task: AzureCLI@2
       displayName: "Build Bicep file"
       inputs:
-        azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
+        azureSubscription: '$(AZURE_SUBSCRIPTION)'
         scriptType: 'bash'
         scriptLocation: 'inlineScript'
         inlineScript: |
@@ -59,7 +63,7 @@ stages:
           - task: AzureCLI@2
             displayName: "Deploy API Management resource"
             inputs:
-              azureSubscription: 'Microsoft Azure MVP Sponsorship (Igor)(630a091a-3a08-4b05-a9f7-1ee7b784c0ae)'
+              azureSubscription: '$(AZURE_SUBSCRIPTION)'
               scriptType: 'bash'
               scriptLocation: 'inlineScript'
               workingDirectory: '$(System.ArtifactsDirectory)/drop'

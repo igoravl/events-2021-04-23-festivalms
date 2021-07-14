@@ -1,4 +1,3 @@
-# Starter pipeline
 name: "02_DevPortal_CD"
 
 trigger:
@@ -55,9 +54,9 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 npm install @azure/storage-blob yargs
-                node ./capture \
+                node ./generate \
                 --subscriptionId "630a091a-3a08-4b05-a9f7-1ee7b784c0ae" \
                 --resourceGroupName "rg_demo_apim_festivalms" \
-                --serviceName "igoravl-apim-dev-brs"
+                --serviceName "igoravl-apim-prd-brs"
             displayName: "Deploy Dev Portal"
 
